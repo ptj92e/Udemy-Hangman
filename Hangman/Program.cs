@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hangman
 {
     class MainClass
     {
-        static string name;
-        static int numberOfGuesses;
         static string correctWord = "hangman";
         static char[] letters;
-
+        static Player player;
+        
         public static void Main(string[] args)
         {
             StartGame();
@@ -25,16 +25,18 @@ namespace Hangman
             AskForUsername();
         }
 
-        static string AskForUsername()
+        static void AskForUsername()
         {
             Console.WriteLine("What is your name?");
             string input = Console.ReadLine();
 
             if (input.Length >= 2)
-                return name = input;
+                player = new Player(input);
             else
-                Console.WriteLine("Your name should be more than 2 characters.");
-                return AskForUsername();
+            {
+                Console.WriteLine("Your name should be more than 1 character long.");
+                AskForUsername();
+            }
         }
 
         private static void PlayGame()
@@ -55,6 +57,7 @@ namespace Hangman
                 if(guessedLetter == correctWord[i])
                 {
                     letters[i] = guessedLetter;
+                    player.score++;
                 }
             }
         }
@@ -76,17 +79,20 @@ namespace Hangman
                 input = Console.ReadLine();
             } while (input.Length != 1);
 
-            numberOfGuesses++;
+            var letter = input[0];
 
-            return input[0];
+            if (!player.guessedLetters.Contains(letter))
+                player.guessedLetters.Add(letter);
+
+            return letter;
         }
 
         private static void EndGame()
         {
             Console.Clear();
             Console.WriteLine("Game Over");
-            Console.WriteLine($"Thank you for playing {name}");
-            Console.WriteLine($"You made {numberOfGuesses} guesses.");
+            Console.WriteLine($"Thank you for playing {player.name}");
+            Console.WriteLine($"You made {player.guessedLetters.Count} guesses. Score: {player.score}");
         }
     }
 }
