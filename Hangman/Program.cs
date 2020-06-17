@@ -18,6 +18,9 @@ namespace Hangman
         {
             Console.WriteLine("Starting game...");
             AskForUsername();
+            if (name.Length <= 2)
+                Console.WriteLine("Your name must be longer than 2 characters");
+                AskForUsername();
         }
 
         static string AskForUsername()
