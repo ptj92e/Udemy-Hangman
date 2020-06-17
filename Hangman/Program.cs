@@ -57,7 +57,7 @@ namespace Hangman
                 if(guessedLetter == correctWord[i])
                 {
                     letters[i] = guessedLetter;
-                    player.score++;
+                    player.Score++;
                 }
             }
         }
@@ -81,8 +81,8 @@ namespace Hangman
 
             var letter = input[0];
 
-            if (!player.guessedLetters.Contains(letter))
-                player.guessedLetters.Add(letter);
+            if (!player.GuessedLetters.Contains(letter))
+                player.GuessedLetters.Add(letter);
 
             return letter;
         }
@@ -91,8 +91,8 @@ namespace Hangman
         {
             Console.Clear();
             Console.WriteLine("Game Over");
-            Console.WriteLine($"Thank you for playing {player.name}");
-            Console.WriteLine($"You made {player.guessedLetters.Count} guesses. Score: {player.score}");
+            Console.WriteLine($"Thank you for playing {player.Name}");
+            Console.WriteLine($"You made {player.GuessedLetters.Count} guesses. Score: {player.Score}");
         }
     }
 }

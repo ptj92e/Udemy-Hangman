@@ -5,13 +5,24 @@ namespace Hangman
 {
     public class Player
     {
+        public string Name { get; private set; }
+
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set
+            {
+                if (value > 0)
+                    score = value;
+            }
+        }
+        public List<char> GuessedLetters { get; } = new List<char>();
+
         public Player(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
 
-        public string name;
-        public int score;
-        public List<char> guessedLetters = new List<char>();
     }
 }
